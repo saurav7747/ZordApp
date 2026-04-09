@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ZordApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="light">
+
+<!-- 🔐 LOGIN -->
+<div id="loginScreen" class="screen">
+  <div class="card">
+    <h2>ZordApp</h2>
+    <input id="usernameInput" placeholder="Enter username">
+    <button onclick="login()">Continue</button>
+  </div>
+</div>
+
+<!-- 🏠 HOME -->
+<div id="homeScreen" class="screen" style="display:none;">
+  
+  <header>
+    <h2>ZordApp</h2>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <button onclick="toggleTheme()">Toggle Theme</button>
+
+  <!-- USER LIST -->
+  <div id="userList"></div>
+
+</div>
+
+<!-- 💬 CHAT -->
+<div id="chatScreen" class="screen" style="display:none;">
+  
+  <header>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img id="chatProfile" style="width:35px;height:35px;border-radius:50%;">
+      <span id="chatName"></span>
+    </div>
+
+    <div>
+      <button onclick="startCall('audio')">Call</button>
+      <button onclick="startCall('video')">Video</button>
+      <button onclick="goBack()">Back</button>
+    </div>
+  </header>
+
+  <!-- 🔥 PROFILE UPLOAD (moved here) -->
+  <div style="padding:5px;">
+    <input type="file" id="profilePic">
+    <button onclick="uploadProfile()">Upload</button>
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="messages"></div>
+
+  <!-- INPUT -->
+  <div class="inputBar">
+    <input id="messageInput" placeholder="Type message">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+</div>
+
+<!-- 📞 CALL SCREEN -->
+<div id="callScreen" style="display:none;">
+  <video id="remoteVideo" autoplay playsinline></video>
+  <video id="myVideo" autoplay muted playsinline></video>
+
+  <div id="callControls">
+    <button onclick="endCall()">End</button>
+    <button onclick="toggleMute()">Mute</button>
+    <button onclick="toggleCamera()">Camera</button>
+  </div>
+</div>
+
+<!-- 🔥 FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+<!-- 📞 PEERJS -->
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+
+<!-- ⚡ APP -->
+<script src="app.js"></script>
+
+</body>
+</html>
+
