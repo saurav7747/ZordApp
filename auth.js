@@ -1,51 +1,35 @@
-import { auth, db } from "./firebase.js";
-
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-  setDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-// Auto redirect if logged in
-onAuthStateChanged(auth, (user)=>{
-  if(user){
-    alert("Login success");
-  }
-});
-
-
 // Signup
-window.signup = async function(){
+function signup(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
   if(!u || !p) return alert("Fill all fields");
 
-  let res = await createUserWithEmailAndPassword(auth, u+"@app.com", p);
+  let email = u + "@app.com";
 
-  await setDoc(doc(db,"users",res.user.uid),{
-    uid:res.user.uid,
-    username:u
-  });
+  auth.createUserWithEmailAndPassword(email, p)
+  .then((res)=>{
+    db.collection("users").doc(res.user.uid).set({
+      uid: res.user.uid,
+      username: u
+    });
 
-  alert("Signup success");
-};
+    alert("Signup success");
+  })
+  .catch(err => alert(err.message));
+}
 
 
 // Login
-window.login = async function(){
+function login(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
-  if(!u || !p) return alert("Fill all fields");
+  let email = u + "@app.com";
 
-  await signInWithEmailAndPassword(auth, u+"@app.com", p);
-
-  alert("Login success");
-};
+  auth.signInWithEmailAndPassword(email, p)
+  .then(()=>{
+    alert("Login success");
+  })
+  .catch(err => alert(err.message));
+}
