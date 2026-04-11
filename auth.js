@@ -12,16 +12,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// Auto login
+// Auto redirect if logged in
 onAuthStateChanged(auth, (user)=>{
   if(user){
-    window.location.href = "main.html";
+    alert("Login success");
   }
 });
 
 
-// SIGNUP
-window.signupUser = async function(){
+// Signup
+window.signup = async function(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
@@ -38,12 +38,14 @@ window.signupUser = async function(){
 };
 
 
-// LOGIN
-window.loginUser = async function(){
+// Login
+window.login = async function(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
   if(!u || !p) return alert("Fill all fields");
 
   await signInWithEmailAndPassword(auth, u+"@app.com", p);
+
+  alert("Login success");
 };
