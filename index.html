@@ -3,17 +3,23 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZordApp</title>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<h1>ZordApp</h1>
+<div class="login-container">
 
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
+  <h1>ZordApp</h1>
 
-<button onclick="signupUser()">Signup</button>
-<button onclick="loginUser()">Login</button>
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="signupUser()">Signup</button>
+  <button onclick="loginUser()">Login</button>
+
+</div>
 
 <script type="module" src="js/auth.js"></script>
 
