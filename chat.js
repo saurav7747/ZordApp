@@ -1,71 +1,49 @@
-let currentUser;
+import { auth, db } from "./firebase.js";
+
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 let chatUser = localStorage.getItem("chatUser");
-let chatUsername = localStorage.getItem("chatUsername");
+chatName.innerText = localStorage.getItem("chatName");
 
-document.getElementById("chatName").innerText = chatUsername;
+onAuthStateChanged(auth,(user)=>{
+  let id = user.uid < chatUser ? user.uid+"_"+chatUser : chatUser+"_"+user.uid;
 
-// Auth check
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "index.html";
-  } else {
-    currentUser = user;
-    loadMessages();
-  }
+  let q = query(collection(db,"chats",id,"msg"),orderBy("time"));
+
+  onSnapshot(q,(snap)=>{
+    chatBox.innerHTML="";
+    snap.forEach(d=>{
+      let m=d.data();
+
+      let div=document.createElement("div");
+      div.innerText=m.text;
+
+      chatBox.appendChild(div);
+    });
+  });
 });
 
-// Chat ID
-function getChatId() {
-  return currentUser.uid < chatUser
-    ? currentUser.uid + "_" + chatUser
-    : chatUser + "_" + currentUser.uid;
-}
+window.send = async function(){
+  let text = msg.value;
 
-// SEND MESSAGE
-function sendMessage() {
-  const input = document.getElementById("msgInput");
-  const text = input.value.trim();
+  onAuthStateChanged(auth, async(user)=>{
+    let id = user.uid < chatUser ? user.uid+"_"+chatUser : chatUser+"_"+user.uid;
 
-  if (!text) return;
-
-  db.collection("chats")
-    .doc(getChatId())
-    .collection("messages")
-    .add({
-      text: text,
-      sender: currentUser.uid,
-      time: Date.now()
+    await addDoc(collection(db,"chats",id,"msg"),{
+      text:text,
+      time:Date.now()
     });
+  });
 
-  input.value = ""; // clear input
-}
-
-// LOAD MESSAGES
-function loadMessages() {
-  db.collection("chats")
-    .doc(getChatId())
-    .collection("messages")
-    .orderBy("time")
-    .onSnapshot(snapshot => {
-      const msgBox = document.getElementById("messages");
-      msgBox.innerHTML = "";
-
-      snapshot.forEach(doc => {
-        const msg = doc.data();
-
-        const div = document.createElement("div");
-        div.className = msg.sender === currentUser.uid ? "me" : "other";
-        div.innerText = msg.text;
-
-        msgBox.appendChild(div);
-      });
-
-      // auto scroll bottom
-      msgBox.scrollTop = msgBox.scrollHeight;
-    });
-}
-
-// BACK
-function goBack() {
-  window.location.href = "home.html";
-}
+  msg.value="";
+};
