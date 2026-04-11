@@ -1,69 +1,32 @@
 import { auth, db } from "./firebase.js";
-
 import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
   collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-let currentUser = null;
+onAuthStateChanged(auth,(user)=>{
+  if(!user) location.href="../index.html";
 
-// 🔐 LOGIN CHECK
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "index.html";
-  } else {
-    currentUser = user;
-    loadUsers();
-  }
-});
+  onSnapshot(collection(db,"users"),snap=>{
+    users.innerHTML="";
+    snap.forEach(doc=>{
+      let u=doc.data();
+      if(u.uid===user.uid) return;
 
-// 📥 LOAD USERS
-async function loadUsers() {
-  try {
-    const snapshot = await getDocs(collection(db, "users"));
+      let div=document.createElement("div");
+      div.innerText=u.username;
 
-    const list = document.getElementById("userList");
-    list.innerHTML = "";
+      div.onclick=()=>{
+        localStorage.setItem("chatUser",u.uid);
+        localStorage.setItem("chatName",u.username);
+        parent.document.getElementById("frame").src="pages/chat.html";
+      };
 
-    snapshot.forEach(doc => {
-      if (doc.id !== currentUser.uid) {
-        const user = doc.data();
-
-        const div = document.createElement("div");
-        div.className = "user-card";
-
-        div.innerHTML = `
-          <span><b>${user.username}</b></span>
-          <button onclick="openChat('${doc.id}', '${user.username}')">Chat</button>
-        `;
-
-        list.appendChild(div);
-      }
+      users.appendChild(div);
     });
-
-  } catch (err) {
-    console.log("Error loading users:", err);
-  }
-}
-
-// 💬 OPEN CHAT (username bhi pass karenge)
-window.openChat = function(uid, username) {
-  localStorage.setItem("chatUser", uid);
-  localStorage.setItem("chatUsername", username);
-  window.location.href = "chat.html";
-};
-
-// 🌙 THEME
-window.toggleTheme = function () {
-  document.body.classList.toggle("dark");
-};
-
-// 🚪 LOGOUT
-window.logout = function () {
-  signOut(auth);
-};
+  });
+});
