@@ -1,3 +1,10 @@
+// Check login
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "index.html";
+  }
+});
+
 // Logout
 function logout() {
   auth.signOut().then(() => {
