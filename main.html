@@ -9,14 +9,14 @@
 
 <iframe id="frame" src="pages/home.html"></iframe>
 
-<div class="bottom-nav">
-  <button onclick="loadPage('home')">💬</button>
-  <button onclick="loadPage('camera')">📷</button>
-  <button onclick="loadPage('settings')">⚙️</button>
+<div class="nav">
+  <button onclick="load('home')">💬</button>
+  <button onclick="load('camera')">📷</button>
+  <button onclick="load('settings')">⚙️</button>
 </div>
 
 <script>
-function loadPage(page){
+function load(page){
   document.getElementById("frame").src = "pages/" + page + ".html";
 }
 </script>
