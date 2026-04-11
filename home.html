@@ -7,13 +7,20 @@
 
 <body>
 
-<h2>ZordApp</h2>
+<div class="container">
 
-<button onclick="logout()">Logout</button>
-<button onclick="toggleTheme()">Toggle Theme</button>
+  <h2>ZordApp</h2>
 
-<h3>Users</h3>
-<div id="userList"></div>
+  <div style="text-align:center;">
+    <button onclick="toggleTheme()">🌙 Theme</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <h3 style="margin-top:15px;">Users</h3>
+
+  <div id="userList"></div>
+
+</div>
 
 <script type="module" src="home.js"></script>
 
