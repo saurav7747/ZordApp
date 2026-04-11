@@ -1,129 +1,39 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+body{
+  margin:0;
+  font-family:sans-serif;
 }
 
-/* BODY */
-body {
-  background: linear-gradient(135deg, #f6d365, #fda085);
-  min-height: 100vh;
+/* iframe */
+iframe{
+  width:100%;
+  height:90vh;
+  border:none;
 }
 
-/* CONTAINER */
-.container {
-  max-width: 400px;
-  margin: auto;
-  padding: 15px;
+/* navbar */
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  background:#fff;
+  padding:10px;
 }
 
-/* HEADER */
-h2 {
-  text-align: center;
-  margin: 10px 0;
-  font-size: 24px;
+/* chat */
+.inputBox{
+  position:fixed;
+  bottom:60px;
+  width:100%;
+  display:flex;
 }
 
-/* BUTTONS */
-button {
-  padding: 10px;
-  margin: 5px;
-  border: none;
-  border-radius: 8px;
-  background: #ffcc00;
-  cursor: pointer;
-  font-weight: bold;
+.inputBox input{
+  flex:1;
+  padding:10px;
 }
 
-button:hover {
-  opacity: 0.8;
-}
-
-/* USER LIST */
-#userList {
-  margin-top: 15px;
-}
-
-/* USER CARD */
-.user-card {
-  background: white;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* CHAT PAGE */
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-/* CHAT BOX */
-.chat-box {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-/* MESSAGES */
-.message {
-  max-width: 70%;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 10px;
-  word-wrap: break-word;
-}
-
-.sent {
-  background: #ffcc00;
-  margin-left: auto;
-}
-
-.received {
-  background: white;
-}
-
-/* INPUT AREA FIXED */
-.chat-input {
-  display: flex;
-  padding: 10px;
-  background: #fff;
-  position: sticky;
-  bottom: 0;
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-.chat-input button {
-  margin-left: 8px;
-}
-
-/* DARK MODE */
-.dark {
-  background: #121212;
-  color: white;
-}
-
-.dark .user-card {
-  background: #1e1e1e;
-}
-
-.dark .chat-box {
-  background: #222;
-}
-
-.dark .received {
-  background: #333;
+.inputBox button{
+  padding:10px;
 }
