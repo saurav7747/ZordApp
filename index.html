@@ -4,21 +4,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZordApp</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body{
+      margin:0;
+      font-family:sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background:linear-gradient(135deg,#667eea,#764ba2);
+    }
+
+    .box{
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      text-align:center;
+      width:280px;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border-radius:10px;
+      border:1px solid #ccc;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#667eea;
+      color:white;
+      font-weight:bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="login-container">
-
-  <h1>ZordApp</h1>
+<div class="box">
+  <h2>ZordApp</h2>
 
   <input id="username" placeholder="Username">
   <input id="password" type="password" placeholder="Password">
 
-  <button onclick="signupUser()">Signup</button>
-  <button onclick="loginUser()">Login</button>
-
+  <button onclick="signup()">Signup</button>
+  <button onclick="login()">Login</button>
 </div>
 
 <script type="module" src="js/auth.js"></script>
