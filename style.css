@@ -177,3 +177,23 @@ body {
   margin: 5px;
   border-radius: 10px;
 }
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-size: 20px;
+}
+
+.user-list {
+  padding: 10px;
+}
+
+.user {
+  padding: 15px;
+  margin: 10px;
+  font-size: 18px;
+  background: white;
+  border-radius: 15px;
+}
