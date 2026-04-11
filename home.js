@@ -13,7 +13,7 @@ import {
 let currentUser = null;
 
 // 🔐 LOGIN CHECK
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "index.html";
   } else {
@@ -24,28 +24,38 @@ onAuthStateChanged(auth, (user) => {
 
 // 📥 LOAD USERS
 async function loadUsers() {
-  const snapshot = await getDocs(collection(db, "users"));
+  try {
+    const snapshot = await getDocs(collection(db, "users"));
 
-  const list = document.getElementById("userList");
-  list.innerHTML = "";
+    const list = document.getElementById("userList");
+    list.innerHTML = "";
 
-  snapshot.forEach(doc => {
-    if (doc.id !== currentUser.uid) {
-      const user = doc.data();
+    snapshot.forEach(doc => {
+      if (doc.id !== currentUser.uid) {
+        const user = doc.data();
 
-      list.innerHTML += `
-        <div style="margin:10px; padding:10px; background:#eee; border-radius:8px;">
-          <b>${user.username}</b><br>
-          <button onclick="openChat('${doc.id}')">Chat</button>
-        </div>
-      `;
-    }
-  });
+        const div = document.createElement("div");
+        div.className = "user-card";
+
+        div.innerHTML = `
+          <span><b>${user.username}</b></span>
+          <button onclick="openChat('${doc.id}', '${user.username}')">Chat</button>
+        `;
+
+        list.appendChild(div);
+      }
+    });
+
+  } catch (err) {
+    console.log("Error loading users:", err);
+  }
 }
 
-// 💬 OPEN CHAT
-window.openChat = function(uid) {
-  window.location.href = `chat.html?uid=${uid}`;
+// 💬 OPEN CHAT (username bhi pass karenge)
+window.openChat = function(uid, username) {
+  localStorage.setItem("chatUser", uid);
+  localStorage.setItem("chatUsername", username);
+  window.location.href = "chat.html";
 };
 
 // 🌙 THEME
