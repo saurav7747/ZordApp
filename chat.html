@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chat</title>
+  <title>ZordApp Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="style.css">
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="chat-container">
+<div class="chat-page">
 
-  <div class="top-bar">
+  <div class="chat-header">
     <button onclick="goBack()">⬅</button>
-    <h3 id="chatName"></h3>
+    <h2 id="chatName"></h2>
   </div>
 
   <div id="messages"></div>
 
-  <div class="chat-input">
-    <input type="text" id="msgInput" placeholder="Type message">
-    <button onclick="sendMessage()">Send</button>
+  <div class="chat-box">
+    <input type="text" id="msgInput" placeholder="Type message...">
+    <button onclick="sendMessage()">➤</button>
   </div>
 
 </div>
