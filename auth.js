@@ -3,7 +3,10 @@ function signup(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
-  if(!u || !p) return alert("Fill all fields");
+  if(!u || !p){
+    alert("Fill all fields");
+    return;
+  }
 
   let email = u + "@app.com";
 
@@ -16,7 +19,9 @@ function signup(){
 
     alert("Signup success");
   })
-  .catch(err => alert(err.message));
+  .catch(err=>{
+    alert(err.message);
+  });
 }
 
 
@@ -25,11 +30,18 @@ function login(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
 
+  if(!u || !p){
+    alert("Fill all fields");
+    return;
+  }
+
   let email = u + "@app.com";
 
   auth.signInWithEmailAndPassword(email, p)
   .then(()=>{
     alert("Login success");
   })
-  .catch(err => alert(err.message));
+  .catch(err=>{
+    alert(err.message);
+  });
 }
