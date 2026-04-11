@@ -4,7 +4,7 @@ let chatUsername = localStorage.getItem("chatUsername");
 
 document.getElementById("chatName").innerText = chatUsername;
 
-// Check login
+// Auth check
 auth.onAuthStateChanged(user => {
   if (!user) {
     window.location.href = "index.html";
@@ -14,16 +14,18 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// Unique chat ID
+// Chat ID
 function getChatId() {
   return currentUser.uid < chatUser
     ? currentUser.uid + "_" + chatUser
     : chatUser + "_" + currentUser.uid;
 }
 
-// Send message
+// SEND MESSAGE
 function sendMessage() {
-  const text = document.getElementById("msgInput").value;
+  const input = document.getElementById("msgInput");
+  const text = input.value.trim();
+
   if (!text) return;
 
   db.collection("chats")
@@ -35,10 +37,10 @@ function sendMessage() {
       time: Date.now()
     });
 
-  document.getElementById("msgInput").value = "";
+  input.value = ""; // clear input
 }
 
-// Load messages
+// LOAD MESSAGES
 function loadMessages() {
   db.collection("chats")
     .doc(getChatId())
@@ -57,10 +59,13 @@ function loadMessages() {
 
         msgBox.appendChild(div);
       });
+
+      // auto scroll bottom
+      msgBox.scrollTop = msgBox.scrollHeight;
     });
 }
 
-// Back
+// BACK
 function goBack() {
   window.location.href = "home.html";
 }
