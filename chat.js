@@ -2,8 +2,7 @@ let currentUser;
 let chatUser = localStorage.getItem("chatUser");
 let chatUsername = localStorage.getItem("chatUsername");
 
-// Show name
-document.getElementById("chatName").innerText = chatUsername;
+chatName.innerText = chatUsername;
 
 // Auth check
 auth.onAuthStateChanged(user => {
@@ -15,16 +14,16 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// Unique chat ID
+// Unique chat id
 function getChatId() {
   return currentUser.uid < chatUser
     ? currentUser.uid + "_" + chatUser
     : chatUser + "_" + currentUser.uid;
 }
 
-// Send message
+// SEND MESSAGE (FIXED)
 function sendMessage() {
-  const input = document.getElementById("msgInput");
+  const input = msgInput;
   const text = input.value.trim();
 
   if (!text) return;
@@ -35,24 +34,27 @@ function sendMessage() {
     .add({
       text: text,
       sender: currentUser.uid,
-      time: Date.now()
+      time: firebase.firestore.FieldValue.serverTimestamp()
     });
 
   input.value = "";
 }
 
-// Load messages
+// REALTIME LOAD (FIXED)
 function loadMessages() {
   db.collection("chats")
     .doc(getChatId())
     .collection("messages")
     .orderBy("time")
     .onSnapshot(snapshot => {
-      const msgBox = document.getElementById("messages");
+
+      const msgBox = messages;
       msgBox.innerHTML = "";
 
       snapshot.forEach(doc => {
         const msg = doc.data();
+
+        if (!msg.text) return;
 
         const div = document.createElement("div");
         div.className = msg.sender === currentUser.uid ? "me" : "other";
@@ -61,12 +63,11 @@ function loadMessages() {
         msgBox.appendChild(div);
       });
 
-      // Auto scroll bottom
       msgBox.scrollTop = msgBox.scrollHeight;
     });
 }
 
-// Back button
+// Back
 function goBack() {
   window.location.href = "home.html";
-                }
+}
