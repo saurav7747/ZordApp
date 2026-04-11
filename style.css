@@ -107,3 +107,73 @@ body {
   border-radius: 10px;
   text-align: left;
 }
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #facc15, #c4b5fd);
+}
+
+/* HEADER */
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #facc15;
+}
+
+.chat-header h2 {
+  margin-left: 10px;
+}
+
+/* CHAT LAYOUT */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* MESSAGES */
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* INPUT BOX */
+.chat-box {
+  display: flex;
+  padding: 10px;
+  background: white;
+}
+
+.chat-box input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.chat-box button {
+  margin-left: 10px;
+  padding: 10px;
+  border: none;
+  background: #facc15;
+  border-radius: 10px;
+}
+
+/* MESSAGE STYLE */
+.me {
+  background: #facc15;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: right;
+}
+
+.other {
+  background: #ddd;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 10px;
+}
