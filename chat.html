@@ -14,18 +14,21 @@
 
 <body>
 
-<div class="chat-page">
+<div class="chat-container">
 
+  <!-- HEADER -->
   <div class="chat-header">
     <button onclick="goBack()">⬅</button>
     <h2 id="chatName"></h2>
   </div>
 
-  <div id="messages"></div>
+  <!-- MESSAGES -->
+  <div id="messages" class="chat-messages"></div>
 
-  <div class="chat-box">
+  <!-- INPUT -->
+  <div class="chat-input-area">
     <input type="text" id="msgInput" placeholder="Type message...">
-    <button onclick="sendMessage()">➤</button>
+    <button onclick="sendMessage()">Send</button>
   </div>
 
 </div>
