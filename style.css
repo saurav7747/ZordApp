@@ -70,3 +70,40 @@ p {
 body {
   transition: 0.3s;
 }
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+}
+
+.me {
+  background: #facc15;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: right;
+}
+
+.other {
+  background: #ddd;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: left;
+}
