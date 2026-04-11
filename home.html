@@ -1,24 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  font-family:sans-serif;
+  padding:10px;
+}
+
+.user{
+  background:#eee;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
 <h2>Users</h2>
 <div id="users"></div>
 
 <script src="firebase.js"></script>
 
 <script>
-auth.onAuthStateChanged(user=>{
+auth.onAuthStateChanged(function(user){
+
   if(!user){
     location.href="index.html";
+    return;
   }
 
-  db.collection("users").onSnapshot(snap=>{
-    users.innerHTML="";
-    snap.forEach(doc=>{
-      let u=doc.data();
+  db.collection("users").onSnapshot(function(snapshot){
 
-      let div=document.createElement("div");
-      div.innerText=u.username;
+    users.innerHTML="";
+
+    snapshot.forEach(function(doc){
+
+      let u = doc.data();
+
+      // ❌ apna user skip kar
+      if(u.uid === user.uid) return;
+
+      let div = document.createElement("div");
+      div.className = "user";
+      div.innerText = u.username;
 
       users.appendChild(div);
     });
+
   });
+
 });
 </script>
+
+</body>
+</html>
