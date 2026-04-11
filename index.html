@@ -1,69 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>ZordApp Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZordApp</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:sans-serif;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      background:linear-gradient(135deg,#667eea,#764ba2);
-    }
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-    .box{
-      background:white;
-      padding:30px;
-      border-radius:20px;
-      text-align:center;
-      width:280px;
-    }
-
-    input{
-      width:100%;
-      padding:12px;
-      margin:10px 0;
-      border-radius:10px;
-      border:1px solid #ccc;
-    }
-
-    button{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      border:none;
-      border-radius:10px;
-      background:#667eea;
-      color:white;
-      font-weight:bold;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="box">
-  <h2>ZordApp</h2>
+<div class="auth-container">
 
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
+  <h1 class="logo">ZordApp</h1>
 
-  <button onclick="signup()">Signup</button>
-  <button onclick="login()">Login</button>
+  <!-- LOGIN -->
+  <div id="loginBox" class="auth-box">
+    <h2>Login</h2>
+
+    <input type="text" id="loginUsername" placeholder="Username">
+    <input type="password" id="loginPassword" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p>Don't have an account?
+      <span onclick="showSignup()">Signup</span>
+    </p>
+  </div>
+
+  <!-- SIGNUP -->
+  <div id="signupBox" class="auth-box" style="display:none;">
+    <h2>Signup</h2>
+
+    <input type="text" id="signupUsername" placeholder="Username">
+    <input type="password" id="signupPassword" placeholder="Password">
+
+    <button onclick="signup()">Signup</button>
+
+    <p>Already have an account?
+      <span onclick="showLogin()">Login</span>
+    </p>
+  </div>
+
 </div>
 
-<!-- Firebase CDN -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-<!-- Your JS -->
 <script src="firebase.js"></script>
-<script src="auth.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
