@@ -3,40 +3,20 @@
 <head>
   <title>ZordApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
-  <h1>ZordApp</h1>
+<h1>ZordApp</h1>
 
-  <!-- Login -->
-  <div id="loginBox">
-    <input type="text" id="loginUsername" placeholder="Username">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button onclick="login()">Login</button>
-    <p onclick="showSignup()">Create Account</p>
-  </div>
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
 
-  <!-- Signup -->
-  <div id="signupBox" style="display:none;">
-    <input type="text" id="signupUsername" placeholder="Username">
-    <input type="password" id="signupPassword" placeholder="Password">
-    <button onclick="signup()">Signup</button>
-    <p onclick="showLogin()">Back to Login</p>
-  </div>
-</div>
+<button onclick="signup()">Signup</button>
+<button onclick="login()">Login</button>
 
-<script src="firebase.js"></script>
-<script src="app.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/auth.js"></script>
 
 </body>
 </html>
-
