@@ -1,12 +1,12 @@
-// 🔥 Auto login check (already logged in ho to direct main page)
+// 🔥 ONLY AUTO LOGIN CHECK (NO REDIRECT LOOP)
 auth.onAuthStateChanged(function(user){
   if(user){
-    window.location.href = "main.html";
+    console.log("User logged in");
   }
 });
 
 
-// 🔥 SIGNUP FUNCTION
+// 🔥 SIGNUP
 function signup(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
@@ -21,7 +21,6 @@ function signup(){
   auth.createUserWithEmailAndPassword(email, p)
   .then(function(res){
 
-    // 🔥 Firestore me user save
     db.collection("users").doc(res.user.uid).set({
       uid: res.user.uid,
       username: u
@@ -29,8 +28,8 @@ function signup(){
 
     alert("Signup success");
 
-    // 👉 direct main page
-    window.location.href = "main.html";
+    // ✅ DIRECT REDIRECT
+    window.location.href = "./main.html";
   })
   .catch(function(error){
     alert(error.message);
@@ -38,7 +37,7 @@ function signup(){
 }
 
 
-// 🔥 LOGIN FUNCTION
+// 🔥 LOGIN
 function login(){
   let u = document.getElementById("username").value;
   let p = document.getElementById("password").value;
@@ -55,8 +54,8 @@ function login(){
 
     alert("Login success");
 
-    // 👉 main page redirect
-    window.location.href = "main.html";
+    // ✅ DIRECT REDIRECT
+    window.location.href = "./main.html";
   })
   .catch(function(error){
     alert(error.message);
