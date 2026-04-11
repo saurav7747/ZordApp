@@ -1,3 +1,10 @@
+// Auto login check
+auth.onAuthStateChanged(user => {
+  if (user) {
+    window.location.href = "home.html";
+  }
+});
+
 function showSignup() {
   document.getElementById("loginBox").style.display = "none";
   document.getElementById("signupBox").style.display = "block";
@@ -36,7 +43,6 @@ function login() {
 
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
-      alert("Login success!");
       window.location.href = "home.html";
     })
     .catch(err => alert(err.message));
