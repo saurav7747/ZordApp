@@ -1,61 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZordApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-  font-family:sans-serif;
-  padding:10px;
-}
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-.user{
-  background:#eee;
-  padding:12px;
-  margin:10px 0;
-  border-radius:10px;
-}
-</style>
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h2>Users</h2>
-<div id="users"></div>
+<!-- TOP BAR -->
+<div class="top-bar">
+  <h1>ZordApp</h1>
+  <button onclick="toggleTheme()">🌙</button>
+</div>
+
+<!-- USER LIST -->
+<div class="user-list" id="userList">
+  <!-- Users will load here -->
+</div>
+
+<!-- BOTTOM NAV (Future ready 🔥) -->
+<div class="bottom-nav">
+  <button>💬</button>
+  <button>📷</button>
+  <button onclick="logout()">⚙️</button>
+</div>
 
 <script src="firebase.js"></script>
-
-<script>
-auth.onAuthStateChanged(function(user){
-
-  if(!user){
-    location.href="index.html";
-    return;
-  }
-
-  db.collection("users").onSnapshot(function(snapshot){
-
-    users.innerHTML="";
-
-    snapshot.forEach(function(doc){
-
-      let u = doc.data();
-
-      // ❌ apna user skip kar
-      if(u.uid === user.uid) return;
-
-      let div = document.createElement("div");
-      div.className = "user";
-      div.innerText = u.username;
-
-      users.appendChild(div);
-    });
-
-  });
-
-});
-</script>
+<script src="home.js"></script>
 
 </body>
 </html>
